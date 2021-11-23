@@ -27,6 +27,8 @@ derivePass = B.pack [10..30]
 noDerivePass :: Bytes
 noDerivePass = B.empty
 
+doDeriveBench :: B.ByteArrayAccess passPhrase =>
+DerivationScheme -> passPhrase -> XPrv -> [Benchmark]
 doDeriveBench dscheme pass parent =
     [ bench "derive-hard" $ nf (\p -> deriveXPrv dscheme pass p hardIdx) parent
     , bench "derive-soft" $ nf (\p -> deriveXPrv dscheme pass p softIdx) parent
